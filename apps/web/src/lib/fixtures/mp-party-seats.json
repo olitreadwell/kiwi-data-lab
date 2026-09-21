@@ -1,0 +1,1240 @@
+[
+  {
+    "parliament": 1,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 40
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 40
+  },
+  {
+    "parliament": 2,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 75
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 75
+  },
+  {
+    "parliament": 3,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 90
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 90
+  },
+  {
+    "parliament": 4,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 125
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 125
+  },
+  {
+    "parliament": 5,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 112
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 112
+  },
+  {
+    "parliament": 6,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 118
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 118
+  },
+  {
+    "parliament": 7,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 95
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 95
+  },
+  {
+    "parliament": 8,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 105
+      },
+      {
+        "party": "Independent (pre-party system)",
+        "seats": 1
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 105
+  },
+  {
+    "parliament": 9,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 111
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 111
+  },
+  {
+    "parliament": 10,
+    "parties": [
+      {
+        "party": "No party",
+        "seats": 102
+      }
+    ],
+    "largestParty": "No party",
+    "largestSeats": 102
+  },
+  {
+    "parliament": 11,
+    "parties": [
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 46
+      },
+      {
+        "party": "No party",
+        "seats": 41
+      }
+    ],
+    "largestParty": "New Zealand Liberal Party",
+    "largestSeats": 46
+  },
+  {
+    "parliament": 12,
+    "parties": [
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 55
+      },
+      {
+        "party": "No party",
+        "seats": 22
+      }
+    ],
+    "largestParty": "New Zealand Liberal Party",
+    "largestSeats": 55
+  },
+  {
+    "parliament": 13,
+    "parties": [
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 45
+      },
+      {
+        "party": "No party",
+        "seats": 37
+      }
+    ],
+    "largestParty": "New Zealand Liberal Party",
+    "largestSeats": 45
+  },
+  {
+    "parliament": 14,
+    "parties": [
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 55
+      },
+      {
+        "party": "No party",
+        "seats": 26
+      }
+    ],
+    "largestParty": "New Zealand Liberal Party",
+    "largestSeats": 55
+  },
+  {
+    "parliament": 15,
+    "parties": [
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 53
+      },
+      {
+        "party": "No party",
+        "seats": 29
+      },
+      {
+        "party": "New Liberal Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Liberal Party",
+    "largestSeats": 53
+  },
+  {
+    "parliament": 16,
+    "parties": [
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 61
+      },
+      {
+        "party": "No party",
+        "seats": 20
+      },
+      {
+        "party": "Reform Party",
+        "seats": 2
+      },
+      {
+        "party": "New Liberal Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Liberal Party",
+    "largestSeats": 61
+  },
+  {
+    "parliament": 17,
+    "parties": [
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 52
+      },
+      {
+        "party": "Reform Party",
+        "seats": 26
+      },
+      {
+        "party": "No party",
+        "seats": 6
+      },
+      {
+        "party": "Independent Political Labour League",
+        "seats": 1
+      },
+      {
+        "party": "New Zealand Labour Party (original)",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Liberal Party",
+    "largestSeats": 52
+  },
+  {
+    "parliament": 18,
+    "parties": [
+      {
+        "party": "Reform Party",
+        "seats": 37
+      },
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 34
+      },
+      {
+        "party": "No party",
+        "seats": 7
+      },
+      {
+        "party": "Social Democratic Party",
+        "seats": 3
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 2
+      },
+      {
+        "party": "New Zealand Labour Party (original)",
+        "seats": 1
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      }
+    ],
+    "largestParty": "Reform Party",
+    "largestSeats": 37
+  },
+  {
+    "parliament": 19,
+    "parties": [
+      {
+        "party": "Reform Party",
+        "seats": 47
+      },
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 36
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 5
+      },
+      {
+        "party": "Social Democratic Party",
+        "seats": 4
+      },
+      {
+        "party": "No party",
+        "seats": 3
+      }
+    ],
+    "largestParty": "Reform Party",
+    "largestSeats": 47
+  },
+  {
+    "parliament": 20,
+    "parties": [
+      {
+        "party": "Reform Party",
+        "seats": 50
+      },
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 19
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 10
+      },
+      {
+        "party": "No party",
+        "seats": 8
+      }
+    ],
+    "largestParty": "Reform Party",
+    "largestSeats": 50
+  },
+  {
+    "parliament": 21,
+    "parties": [
+      {
+        "party": "Reform Party",
+        "seats": 40
+      },
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 23
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 17
+      },
+      {
+        "party": "No party",
+        "seats": 3
+      }
+    ],
+    "largestParty": "Reform Party",
+    "largestSeats": 40
+  },
+  {
+    "parliament": 22,
+    "parties": [
+      {
+        "party": "Reform Party",
+        "seats": 55
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 14
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 6
+      },
+      {
+        "party": "New Zealand Liberal Party",
+        "seats": 5
+      },
+      {
+        "party": "No party",
+        "seats": 3
+      }
+    ],
+    "largestParty": "Reform Party",
+    "largestSeats": 55
+  },
+  {
+    "parliament": 23,
+    "parties": [
+      {
+        "party": "Reform Party",
+        "seats": 29
+      },
+      {
+        "party": "United Party",
+        "seats": 29
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 20
+      },
+      {
+        "party": "No party",
+        "seats": 9
+      }
+    ],
+    "largestParty": "Reform Party",
+    "largestSeats": 29
+  },
+  {
+    "parliament": 24,
+    "parties": [
+      {
+        "party": "Reform Party",
+        "seats": 28
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 27
+      },
+      {
+        "party": "United Party",
+        "seats": 19
+      },
+      {
+        "party": "No party",
+        "seats": 10
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "Reform Party",
+    "largestSeats": 28
+  },
+  {
+    "parliament": 25,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 54
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 19
+      },
+      {
+        "party": "No party",
+        "seats": 8
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 54
+  },
+  {
+    "parliament": 26,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 57
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 29
+      },
+      {
+        "party": "No party",
+        "seats": 3
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      },
+      {
+        "party": "Democratic Labour Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 57
+  },
+  {
+    "parliament": 27,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 47
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 37
+      },
+      {
+        "party": "No party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 47
+  },
+  {
+    "parliament": 28,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 45
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 38
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 45
+  },
+  {
+    "parliament": 29,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 46
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 35
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 46
+  },
+  {
+    "parliament": 30,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 51
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 33
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 51
+  },
+  {
+    "parliament": 31,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 46
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 36
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 46
+  },
+  {
+    "parliament": 32,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 41
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 40
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 41
+  },
+  {
+    "parliament": 33,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 48
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 39
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 48
+  },
+  {
+    "parliament": 34,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 45
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 35
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 45
+  },
+  {
+    "parliament": 35,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 45
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 40
+      },
+      {
+        "party": "Social Credit",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 45
+  },
+  {
+    "parliament": 36,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 45
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 40
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 45
+  },
+  {
+    "parliament": 37,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 56
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 32
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 56
+  },
+  {
+    "parliament": 38,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 56
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 34
+      },
+      {
+        "party": "Social Credit",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 56
+  },
+  {
+    "parliament": 39,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 51
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 44
+      },
+      {
+        "party": "Social Credit",
+        "seats": 2
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 51
+  },
+  {
+    "parliament": 40,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 47
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 43
+      },
+      {
+        "party": "Social Credit",
+        "seats": 2
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 47
+  },
+  {
+    "parliament": 41,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 56
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 38
+      },
+      {
+        "party": "No party",
+        "seats": 2
+      },
+      {
+        "party": "Social Credit",
+        "seats": 1
+      },
+      {
+        "party": "Democrats",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 56
+  },
+  {
+    "parliament": 42,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 58
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 40
+      },
+      {
+        "party": "No party",
+        "seats": 1
+      },
+      {
+        "party": "NewLabour Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 58
+  },
+  {
+    "parliament": 43,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 68
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 30
+      },
+      {
+        "party": "No party",
+        "seats": 2
+      },
+      {
+        "party": "NZ Liberal Party",
+        "seats": 2
+      },
+      {
+        "party": "Alliance",
+        "seats": 2
+      },
+      {
+        "party": "NewLabour Party",
+        "seats": 1
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 68
+  },
+  {
+    "parliament": 44,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 51
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 45
+      },
+      {
+        "party": "United New Zealand",
+        "seats": 7
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 5
+      },
+      {
+        "party": "No party",
+        "seats": 4
+      },
+      {
+        "party": "Alliance",
+        "seats": 2
+      },
+      {
+        "party": "Future New Zealand (Dunne)",
+        "seats": 1
+      },
+      {
+        "party": "Christian Democrat Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 51
+  },
+  {
+    "parliament": 45,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 47
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 38
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 18
+      },
+      {
+        "party": "Alliance",
+        "seats": 13
+      },
+      {
+        "party": "Independent",
+        "seats": 10
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 8
+      },
+      {
+        "party": "Mauri Pacific",
+        "seats": 5
+      },
+      {
+        "party": "United New Zealand",
+        "seats": 1
+      },
+      {
+        "party": "Mana Wahine Te Ira Tangata",
+        "seats": 1
+      },
+      {
+        "party": "Christian Heritage Party",
+        "seats": 1
+      },
+      {
+        "party": "Te Tawharau",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 47
+  },
+  {
+    "parliament": 46,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 49
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 41
+      },
+      {
+        "party": "Alliance",
+        "seats": 10
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 9
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 7
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 5
+      },
+      {
+        "party": "United New Zealand",
+        "seats": 1
+      },
+      {
+        "party": "United Future New Zealand",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 49
+  },
+  {
+    "parliament": 47,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 54
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 27
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 13
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 10
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 9
+      },
+      {
+        "party": "United Future New Zealand",
+        "seats": 8
+      },
+      {
+        "party": "Jim Anderton's Progressive Coalition",
+        "seats": 2
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      },
+      {
+        "party": "M\u0101ori Party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 54
+  },
+  {
+    "parliament": 48,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 54
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 49
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 8
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 8
+      },
+      {
+        "party": "M\u0101ori Party",
+        "seats": 4
+      },
+      {
+        "party": "United Future New Zealand",
+        "seats": 3
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 2
+      },
+      {
+        "party": "Independent",
+        "seats": 2
+      },
+      {
+        "party": "Jim Anderton's Progressive Coalition",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 54
+  },
+  {
+    "parliament": 49,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 60
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 47
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 11
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 6
+      },
+      {
+        "party": "M\u0101ori Party",
+        "seats": 5
+      },
+      {
+        "party": "Independent",
+        "seats": 3
+      },
+      {
+        "party": "Jim Anderton's Progressive Coalition",
+        "seats": 1
+      },
+      {
+        "party": "United Future New Zealand",
+        "seats": 1
+      },
+      {
+        "party": "MANA",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 60
+  },
+  {
+    "parliament": 50,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 63
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 38
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 14
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 8
+      },
+      {
+        "party": "M\u0101ori Party",
+        "seats": 3
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 1
+      },
+      {
+        "party": "United Future New Zealand",
+        "seats": 1
+      },
+      {
+        "party": "MANA",
+        "seats": 1
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 63
+  },
+  {
+    "parliament": 51,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 61
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 35
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 16
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 13
+      },
+      {
+        "party": "M\u0101ori Party",
+        "seats": 2
+      },
+      {
+        "party": "United Future New Zealand",
+        "seats": 1
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 61
+  },
+  {
+    "parliament": 52,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 61
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 46
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 9
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 8
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 1
+      },
+      {
+        "party": "Independent",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 61
+  },
+  {
+    "parliament": 53,
+    "parties": [
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 68
+      },
+      {
+        "party": "New Zealand National Party",
+        "seats": 36
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 10
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 10
+      },
+      {
+        "party": "Independent",
+        "seats": 3
+      },
+      {
+        "party": "M\u0101ori Party",
+        "seats": 2
+      }
+    ],
+    "largestParty": "New Zealand Labour Party",
+    "largestSeats": 68
+  },
+  {
+    "parliament": 54,
+    "parties": [
+      {
+        "party": "New Zealand National Party",
+        "seats": 50
+      },
+      {
+        "party": "New Zealand Labour Party",
+        "seats": 39
+      },
+      {
+        "party": "Green Party of Aotearoa / New Zealand",
+        "seats": 20
+      },
+      {
+        "party": "ACT New Zealand",
+        "seats": 11
+      },
+      {
+        "party": "New Zealand First Party",
+        "seats": 9
+      },
+      {
+        "party": "M\u0101ori Party",
+        "seats": 7
+      },
+      {
+        "party": "Independent",
+        "seats": 2
+      },
+      {
+        "party": "No party",
+        "seats": 1
+      }
+    ],
+    "largestParty": "New Zealand National Party",
+    "largestSeats": 50
+  }
+]
