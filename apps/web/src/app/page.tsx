@@ -1,4 +1,4 @@
-import { Container, Stack } from '@nzlab/ui';
+import { Container, Stack } from '@kiwilab/ui';
 
 import { MicrositeGallery } from '@/components/MicrositeGallery';
 import type { MicrositeGalleryCard } from '@/components/MicrositeGallery';

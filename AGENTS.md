@@ -1,6 +1,6 @@
 @~/.claude/AGENTS.md
 
-# nz-data-lab
+# kiwi-data-lab
 
 Example site for `nz-open-data-connectors`: one microsite (the sheep index)
 showing the full pipeline from a NZ public-data connector to a deployed static
@@ -36,7 +36,7 @@ doc that disagrees)
 
 ## Conventions
 
-- Components: prefer `@nzlab/ui` first (`packages/ui/src/index.ts` is the export
+- Components: prefer `@kiwilab/ui` first (`packages/ui/src/index.ts` is the export
   surface). Canonical pattern is `packages/ui/src/components/Button.tsx` +
   `_button.scss` — copy it for new hybrid Tailwind/SCSS components.
 - New interactive primitive (dialog, dropdown, etc): `npx shadcn add <component>` run

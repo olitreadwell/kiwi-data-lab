@@ -1,5 +1,5 @@
-import { createStatsNzClient, parseStatsNzCsv, StatsNzError } from '@nzlab/stats-nz';
-import type { StatsNzObservation } from '@nzlab/stats-nz';
+import { createStatsNzClient, parseStatsNzCsv, StatsNzError } from '@kiwilab/stats-nz';
+import type { StatsNzObservation } from '@kiwilab/stats-nz';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 

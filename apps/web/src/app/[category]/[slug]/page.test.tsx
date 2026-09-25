@@ -105,10 +105,10 @@ describe('MicrositePage', () => {
     await expect(
       generateMetadata({ params: Promise.resolve(paramsFor('sheep-index')) }),
     ).resolves.toEqual({
-      title: 'Sheep index - nz-data-lab',
+      title: 'Sheep index - kiwi-data-lab',
       description: expect.any(String),
       openGraph: {
-        title: 'Sheep index - nz-data-lab',
+        title: 'Sheep index - kiwi-data-lab',
         description: expect.any(String),
         url: '/agriculture/sheep-index/',
         type: 'article',
@@ -119,7 +119,7 @@ describe('MicrositePage', () => {
   it('returns a generic title for an unknown microsite', async () => {
     await expect(generateMetadata({ params: Promise.resolve(paramsFor('nope')) })).resolves.toEqual(
       {
-        title: 'nz-data-lab',
+        title: 'kiwi-data-lab',
       },
     );
   });

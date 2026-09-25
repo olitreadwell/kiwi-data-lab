@@ -1,5 +1,5 @@
-import { StatsNzError } from '@nzlab/stats-nz';
-import type { StatsNzObservation } from '@nzlab/stats-nz';
+import { StatsNzError } from '@kiwilab/stats-nz';
+import type { StatsNzObservation } from '@kiwilab/stats-nz';
 
 /** One row of a "wide" time series: a year plus one value per named series. */
 export type WideSeriesPoint<K extends string = string> = { year: number } & Record<K, number>;

@@ -193,7 +193,7 @@ export const MICROSITES: MicrositeConfig[] = withHiddenMicrositesRemoved<Microsi
     chartType: 'Line chart',
     category: 'Agriculture & farming',
     dataNote:
-      'Data: Stats NZ Aotearoa Data Explorer, table AGR_AGR_003 (Livestock Numbers by Regional Council), national sheep total, fetched at deploy time via @nzlab/stats-nz, falling back to a committed snapshot when the API blocks the build runner; the site redeploys daily.',
+      'Data: Stats NZ Aotearoa Data Explorer, table AGR_AGR_003 (Livestock Numbers by Regional Council), national sheep total, fetched at deploy time via @kiwilab/stats-nz, falling back to a committed snapshot when the API blocks the build runner; the site redeploys daily.',
     references: [
       {
         label: 'Sheep number falls to six for each person (Stats NZ)',
@@ -465,7 +465,7 @@ export const MICROSITES: MicrositeConfig[] = withHiddenMicrositesRemoved<Microsi
     chartType: 'Map',
     category: 'Earthquakes & geology',
     dataNote:
-      'Data: GeoNet API (api.geonet.org.nz/quake?MMI=3), recent felt quakes, fetched at deploy time via @nzlab/nz-sources, falling back to a committed snapshot when the API blocks the build runner. The site redeploys daily.',
+      'Data: GeoNet API (api.geonet.org.nz/quake?MMI=3), recent felt quakes, fetched at deploy time via @kiwilab/nz-sources, falling back to a committed snapshot when the API blocks the build runner. The site redeploys daily.',
     references: [
       {
         label: 'Earthquake FAQ (GeoNet)',

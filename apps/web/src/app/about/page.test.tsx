@@ -9,7 +9,7 @@ expect.extend(toHaveNoViolations);
 describe('AboutPage', () => {
   it('explains what the site is and where the data comes from', () => {
     render(<AboutPage />);
-    expect(screen.getByRole('heading', { level: 1, name: 'About nz-data-lab' })).toBeVisible();
+    expect(screen.getByRole('heading', { level: 1, name: 'About kiwi-data-lab' })).toBeVisible();
     expect(screen.getByText(/national sheep flock/)).toBeVisible();
     expect(screen.getByText(/Stats NZ Aotearoa Data Explorer/)).toBeVisible();
     expect(screen.getByRole('link', { name: 'nz-open-data-connectors' })).toHaveAttribute(
@@ -22,7 +22,7 @@ describe('AboutPage', () => {
     );
     expect(screen.getByRole('link', { name: 'GitHub' })).toHaveAttribute(
       'href',
-      'https://github.com/olitreadwell/nz-data-lab',
+      'https://github.com/olitreadwell/kiwi-data-lab',
     );
   });
 

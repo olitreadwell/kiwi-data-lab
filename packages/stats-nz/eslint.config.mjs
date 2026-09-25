@@ -1,4 +1,4 @@
-import config from '@nzlab/config-eslint/base';
+import config from '@kiwilab/config-eslint/base';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 

@@ -10,7 +10,7 @@ it fetchable live.
 ## Data source
 
 Stats NZ Aotearoa Data Explorer, table `AGR_AGR_003` (Livestock Numbers by Regional Council),
-fetched at deploy time as `format=csv` via `@nzlab/stats-nz`. The page filters the national
+fetched at deploy time as `format=csv` via `@kiwilab/stats-nz`. The page filters the national
 sheep series (livestock code `6731`, area code `20` = New Zealand total). The site is a
 static export, so the page is a build-time snapshot; the deploy workflow runs daily to keep the
 numbers fresh. If the Stats NZ gateway blocks the build runner (GitHub Actions IPs get 401 on
