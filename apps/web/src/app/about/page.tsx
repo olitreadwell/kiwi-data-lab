@@ -53,8 +53,8 @@ export default function AboutPage(): React.ReactElement {
         <section className="space-y-3">
           <h2 className="numeral-heading-lg">The sheep index</h2>
           <p className="numeral-paragraph-md">
-            The current experiment tracks the national sheep flock. It has nearly halved since 1994,
-            from 49.5 million sheep to 23.3 million by 2025. The real peak came earlier: in 1982 New
+            The sheep index tracks the national sheep flock. It has nearly halved since 1994, from
+            49.5 million sheep to 23.3 million by 2025. The real peak came earlier: in 1982 New
             Zealand counted 70 million sheep, more than 20 for every person.
           </p>
           <p className="numeral-paragraph-md">

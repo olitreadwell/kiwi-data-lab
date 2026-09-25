@@ -50,19 +50,28 @@ describe('GovernmentSeatShareChart', () => {
     expect(screen.getAllByText('Other').length).toBeGreaterThan(0);
   });
 
-  it('lists every prime minister since 1984 with their years', () => {
+  it('lists every prime minister since 1935 with their years', () => {
     render(<GovernmentSeatShareChart rows={ROWS} />);
     expect(screen.getByText('Prime ministers on this chart')).toBeInTheDocument();
+    expect(screen.getAllByText(/Michael Joseph Savage/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/David Lange/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Jacinda Ardern/).length).toBeGreaterThan(0);
     expect(screen.getByText(/2023–present/)).toBeInTheDocument();
   });
 
-  it('labels the prime minister bands inside the chart domain', () => {
+  it('labels the prime minister bands with the names that fit', () => {
     render(<GovernmentSeatShareChart rows={ROWS} />);
     expect(screen.getByText('Key · English')).toBeInTheDocument();
-    expect(screen.getAllByText('Ardern · Hipkins')).not.toHaveLength(0);
+    expect(screen.getByText('Ardern · Hipkins')).toBeInTheDocument();
     expect(screen.getByText('Luxon')).toBeInTheDocument();
+  });
+
+  it('labels the series with the election years it was given', () => {
+    render(<GovernmentSeatShareChart rows={ROWS} />);
+    expect(screen.getByRole('application')).toHaveAttribute(
+      'aria-label',
+      'Share of seats by party per parliament, 2008 to 2023',
+    );
   });
 
   it('has no accessibility violations', async () => {

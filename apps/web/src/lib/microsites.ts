@@ -63,7 +63,8 @@ export type MicrositeCategory =
   | 'Transport'
   | 'Education'
   | 'Open data & digital'
-  | 'Society & community';
+  | 'Society & community'
+  | 'Politics & government';
 
 /** URL slug for each microsite category, used for /category-slug/ routes. */
 export const CATEGORY_SLUGS: Record<MicrositeCategory, string> = {
@@ -78,6 +79,7 @@ export const CATEGORY_SLUGS: Record<MicrositeCategory, string> = {
   Education: 'education',
   'Open data & digital': 'open-data',
   'Society & community': 'society',
+  'Politics & government': 'politics',
 };
 
 /** Category slug for a microsite config. */
@@ -163,6 +165,8 @@ export const CATEGORY_DETAILS: Record<MicrositeCategory, string> = {
   'Open data & digital':
     'Live searches across New Zealand’s open-data catalogues, digitised collections, and marketplaces.',
   'Society & community': 'The parks and playgrounds that shape everyday neighbourhood life.',
+  'Politics & government':
+    'Elections, parties, and the shape of the House: who won what, and who ended up running the country.',
 };
 
 export const MICROSITES: MicrositeConfig[] = withHiddenMicrositesRemoved<MicrositeConfig>([
@@ -2000,6 +2004,56 @@ export const MICROSITES: MicrositeConfig[] = withHiddenMicrositesRemoved<Microsi
         label: 'New Zealand business demography statistics: At February 2020 (Stats NZ)',
         url: 'https://www.stats.govt.nz/information-releases/new-zealand-business-demography-statistics-at-february-2020/',
         kind: 'data',
+      },
+    ],
+  },
+
+  {
+    slug: 'parliament-party-seats',
+    keyFacts: [
+      'The House grew from 80 seats in 1935 to 99 by 1993, then jumped to 120 when MMP arrived in 1996. In 2023 it sat at 122.',
+      'In 2020 Labour won 65 of 120 seats, the only single-party majority under MMP.',
+      'In 2023 National took 48 seats and needed both ACT (11) and NZ First (8) to govern.',
+      'Winning the most seats is not enough: National took 56 in 2017 and still went into opposition.',
+    ],
+    howToRead:
+      'Each bar is one election year. The colours are the parties and taller means more seats. Hover a bar for the exact counts. The second chart rescales the same seats to a share of the House, with the prime minister of each era along the top.',
+    sourceUrl: 'https://catalogue.data.govt.nz/dataset/members-of-parliament',
+    label: 'Parliament party seats',
+    eyebrow: 'the parliament seats',
+    title: 'Which party held the most seats, election by election.',
+    description:
+      'Every election since 1935 in seats: who won the House, how big it was, and which party got to run the country. The counts come from the Parliament Member Terms list on the data.govt.nz datastore, fetched at build time.',
+    paragraphs: [
+      "A seat is counted once per member elected at that parliament's general election, so by-elections and mid-term replacements do not inflate the bars. Counting every row in the source table instead would put 143 members in the 1996 parliament, which had 120 seats.",
+      'The flags mark the twelve elections where the government changed, curated from election results rather than read off the seat counts. In 2017 National won 56 seats and Labour 46, and Labour formed the government. The 2023 election was the first under MMP that needed three parties in coalition.',
+    ],
+    accent: 'teal',
+    dataSource: 'data.govt.nz',
+    chartType: 'Bar chart',
+    category: 'Politics & government',
+    dataNote:
+      'Data: New Zealand Parliament, Members of Parliament - Member Terms, served through the data.govt.nz CKAN datastore (resource 9767376e-ead0-468d-8b55-a65dfb629b54) and fetched at build time, falling back to a committed snapshot of the same table when the datastore is unreachable. Parties are bucketed into Labour, National, Green, NZ First, ACT and Other, so the 2023 Other block holds the Māori Party’s six seats, and the 1935 coalition members sit under National, a party formed the following year.',
+    references: [
+      {
+        label: 'Members of Parliament - Member Terms (data.govt.nz)',
+        url: 'https://catalogue.data.govt.nz/dataset/members-of-parliament',
+        kind: 'data',
+      },
+      {
+        label: 'Members of Parliament (New Zealand Parliament)',
+        url: 'https://www.parliament.nz/en/mps-and-electorates/members-of-parliament/',
+        kind: 'data',
+      },
+      {
+        label: 'Parliamentary parties (New Zealand Parliament)',
+        url: 'https://www.parliament.nz/en/mps-and-electorates/political-parties/',
+        kind: 'news',
+      },
+      {
+        label: 'Parliament (Te Ara)',
+        url: 'https://teara.govt.nz/en/parliament',
+        kind: 'history',
       },
     ],
   },

@@ -1,3 +1,5 @@
+import type { PartySeatCount } from '@/lib/government-data';
+
 /** Bucket key a Member Terms party name maps to. */
 export type PartyBucketKey = 'labour' | 'national' | 'green' | 'nzFirst' | 'act' | 'other';
 
@@ -27,4 +29,29 @@ export function bucketKeyFor(party: string): PartyBucketKey {
   if (party.includes('First')) return 'nzFirst';
   if (party.includes('ACT')) return 'act';
   return 'other';
+}
+
+/** One election's parties, as much as the stack order needs. */
+export interface ElectionPartySeats {
+  parties: PartySeatCount[];
+}
+
+/**
+ * Chart buckets ordered for stacking, smallest party first, so the biggest
+ * parties end up against the top of the chart: the top block of a stack is
+ * bounded by the total, which makes it the easiest one to read. Ties keep the
+ * legend order.
+ * @param rows - one entry per election in the chart window
+ */
+export function partyBucketsBySizeFor(rows: ElectionPartySeats[]): PartyBucket[] {
+  const seatsByBucket = new Map<PartyBucketKey, number>();
+  for (const row of rows) {
+    for (const party of row.parties) {
+      const key = bucketKeyFor(party.party);
+      seatsByBucket.set(key, (seatsByBucket.get(key) ?? 0) + party.seats);
+    }
+  }
+  return [...PARTY_BUCKETS].sort(
+    (first, second) => (seatsByBucket.get(first.key) ?? 0) - (seatsByBucket.get(second.key) ?? 0),
+  );
 }

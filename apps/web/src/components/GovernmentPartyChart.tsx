@@ -3,13 +3,15 @@
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import type { TooltipContentProps } from 'recharts';
 
+import { electionYearRangeLabelFor } from '@/lib/government-data';
 import type { ParliamentPartyRow } from '@/lib/government-data';
 import { GOVERNMENT_CHANGE_EVENTS } from '@/lib/government-events';
-import { bucketKeyFor, PARTY_BUCKETS } from '@/lib/party-buckets';
+import { bucketKeyFor, PARTY_BUCKETS, partyBucketsBySizeFor } from '@/lib/party-buckets';
 import { usePrefersReducedMotion } from '@/lib/use-prefers-reduced-motion';
 
 import { ChartDataTable } from './ChartDataTable';
 import { ChartExplain, EventMarkerLegend, EventReferenceLines } from './ChartNotes';
+import { PrimeMinisterTooltipLine } from './PrimeMinisterTooltipLine';
 
 interface GovernmentPartyChartProps {
   rows: ParliamentPartyRow[];
@@ -49,9 +51,11 @@ function PartyTooltip({ active, label, payload }: TooltipContentProps): React.Re
   if (!active || payload === undefined || payload.length === 0) {
     return null;
   }
+  const year = Number(label);
   return (
-    <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm shadow-sm">
+    <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2 text-sm text-[var(--color-fg)] shadow-sm">
       <p className="font-medium">{label}</p>
+      {Number.isFinite(year) ? <PrimeMinisterTooltipLine year={year} /> : null}
       {payload.map((entry) => (
         <p key={String(entry.dataKey)} className="text-[var(--color-muted)]">
           {String(entry.name)}: {formatSeats(Number(entry.value))} seats
@@ -69,6 +73,9 @@ function PartyTooltip({ active, label, payload }: TooltipContentProps): React.Re
 export function GovernmentPartyChart({ rows }: GovernmentPartyChartProps): React.ReactElement {
   const prefersReducedMotion = usePrefersReducedMotion();
   const chartRows = toChartRows(rows);
+  // Smallest party first, so the biggest block of each bar sits on top.
+  const stackOrder = partyBucketsBySizeFor(rows);
+  const yearRangeLabel = electionYearRangeLabelFor(rows);
   return (
     <div>
       <ul className="mb-2 flex flex-wrap gap-x-4 gap-y-1">
@@ -95,7 +102,7 @@ export function GovernmentPartyChart({ rows }: GovernmentPartyChartProps): React
           <BarChart
             data={chartRows}
             margin={{ top: 24, right: 8, bottom: 8, left: 8 }}
-            aria-label="Seats by party per parliament, 1984 to 2023"
+            aria-label={`Seats by party per parliament, ${yearRangeLabel}`}
           >
             <XAxis dataKey="year" tick={{ fontSize: 12 }} tickLine={false} />
             <YAxis
@@ -110,7 +117,14 @@ export function GovernmentPartyChart({ rows }: GovernmentPartyChartProps): React
               cursor={{ fill: 'var(--color-border)', opacity: 0.3 }}
             />
             <EventReferenceLines events={GOVERNMENT_CHANGE_EVENTS} />
-            {PARTY_BUCKETS.map((bucket) => (
+            <Bar
+              dataKey="other"
+              name="Other"
+              stackId="seats"
+              fill="var(--color-muted)"
+              isAnimationActive={!prefersReducedMotion}
+            />
+            {stackOrder.map((bucket) => (
               <Bar
                 key={bucket.key}
                 dataKey={bucket.key}
@@ -120,26 +134,21 @@ export function GovernmentPartyChart({ rows }: GovernmentPartyChartProps): React
                 isAnimationActive={!prefersReducedMotion}
               />
             ))}
-            <Bar
-              dataKey="other"
-              name="Other"
-              stackId="seats"
-              fill="var(--color-muted)"
-              isAnimationActive={!prefersReducedMotion}
-            />
           </BarChart>
         </ResponsiveContainer>
       </div>
       <ChartExplain>
-        Each bar is one election year. The colours are the parties. Taller means more seats. The
-        flags mark the years the government changed: 1984, 1990, 1999, 2008, 2017, and 2023.
+        Each bar is one election year. The colours are the parties. Taller means more seats. Each
+        dashed flag marks a year the government changed, and the list below says which government
+        took office. Hover a bar to see the exact seat counts and the prime ministers who held
+        office that year.
       </ChartExplain>
       <EventMarkerLegend
         heading="Government changes on this chart"
         events={GOVERNMENT_CHANGE_EVENTS}
       />
       <ChartDataTable
-        summary="Seats by party per election, 1984 to 2023."
+        summary={`Seats by party per election, ${yearRangeLabel}.`}
         columns={[
           { key: 'year', header: 'Election year' },
           { key: 'labour', header: 'Labour', format: formatSeats },

@@ -46,8 +46,24 @@ describe('GovernmentPartyChart', () => {
     render(<GovernmentPartyChart rows={ROWS} />);
     expect(screen.getByText(/Each bar is one election year/)).toBeInTheDocument();
     expect(screen.getByText('Government changes on this chart')).toBeInTheDocument();
-    expect(screen.getAllByText('Labour takes office')).toHaveLength(3);
-    expect(screen.getAllByText('National takes office')).toHaveLength(3);
+    expect(screen.getAllByText('Labour takes office')).toHaveLength(6);
+    expect(screen.getAllByText('National takes office')).toHaveLength(6);
+  });
+
+  it('labels the chart, and its data table, with the election years it was given', () => {
+    render(<GovernmentPartyChart rows={ROWS} />);
+    expect(screen.getByRole('application')).toHaveAttribute(
+      'aria-label',
+      'Seats by party per parliament, 2008 to 2023',
+    );
+    // The disclosure summary and the table caption carry the same label.
+    expect(screen.getAllByText('Seats by party per election, 2008 to 2023.')).toHaveLength(2);
+  });
+
+  it('prints the election year of every row in the data table', () => {
+    render(<GovernmentPartyChart rows={ROWS} />);
+    const yearCells = screen.getByRole('table').querySelectorAll('tbody th[scope="row"]');
+    expect([...yearCells].map((cell) => cell.textContent)).toEqual(['2008', '2020', '2023']);
   });
 
   it('has no accessibility violations', async () => {

@@ -7,7 +7,7 @@ const PARTY_LABEL = new Map(PARTY_BUCKETS.map((bucket) => [bucket.key, bucket.la
 const COLOR_BY_PARTY = new Map(PARTY_BUCKETS.map((bucket) => [bucket.key, bucket.color]));
 
 /**
- * Numbered list of every prime minister since 1984, with party colour dot,
+ * Numbered list of every prime minister since 1935, with party colour dot,
  * the years they held the job, and a citation. Pairs with the bands drawn
  * by PrimeMinisterBand.
  * @param root0
@@ -23,7 +23,10 @@ export function PrimeMinisterLegend({
       <p className="numeral-text-eyebrow text-[var(--color-muted)]">{heading}</p>
       <ol className="mt-2 list-decimal space-y-1 pl-5">
         {PRIME_MINISTERS.map((pm) => (
-          <li key={pm.name} className="numeral-paragraph-sm text-[var(--color-muted)]">
+          <li
+            key={`${pm.name}-${String(pm.fromYear)}`}
+            className="numeral-paragraph-sm text-[var(--color-muted)]"
+          >
             <span
               className="mr-1.5 inline-block size-2.5 rounded-full"
               style={{ backgroundColor: COLOR_BY_PARTY.get(pm.party) }}

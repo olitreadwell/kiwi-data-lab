@@ -40,6 +40,34 @@ vi.mock('@/lib/sheep-data', async (importOriginal) => {
   };
 });
 
+vi.mock('@/lib/parliament-datastore', () => ({
+  fetchParliamentPartySeats: vi.fn().mockResolvedValue({
+    source: 'datastore',
+    rows: [
+      {
+        parliament: 25,
+        electionYear: 1935,
+        largestParty: 'New Zealand Labour Party',
+        largestSeats: 53,
+        parties: [
+          { party: 'New Zealand Labour Party', seats: 53 },
+          { party: 'New Zealand National Party', seats: 19 },
+        ],
+      },
+      {
+        parliament: 54,
+        electionYear: 2023,
+        largestParty: 'New Zealand National Party',
+        largestSeats: 48,
+        parties: [
+          { party: 'New Zealand National Party', seats: 48 },
+          { party: 'New Zealand Labour Party', seats: 34 },
+        ],
+      },
+    ],
+  }),
+}));
+
 describe('MicrositePage', () => {
   it('renders the sheep story with narrative, chart, and sources', async () => {
     const stream = await renderToReadableStream(
@@ -94,5 +122,19 @@ describe('MicrositePage', () => {
         title: 'nz-data-lab',
       },
     );
+  });
+
+  it('renders the parliament story at its politics path', async () => {
+    const stream = await renderToReadableStream(
+      <MicrositePage params={Promise.resolve(paramsFor('parliament-party-seats'))} />,
+    );
+    const html = await new Response(stream).text();
+    expect(html).toContain('Which party held the most seats, election by election.');
+    expect(html).toContain('href="/politics"');
+    expect(html).toContain('Elections shown');
+    expect(html).toContain('Government changes');
+    expect(html).toContain('Share of the house, and who held the top job.');
+    expect(html).toContain('Seat counts were fetched from the datastore');
+    expect(html.match(/<h1[^>]*>/g) ?? []).toHaveLength(1);
   });
 });

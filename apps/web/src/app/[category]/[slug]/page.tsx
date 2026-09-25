@@ -3,11 +3,15 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { GovernmentPartyChart } from '@/components/GovernmentPartyChart';
+import { GovernmentSeatShareChart } from '@/components/GovernmentSeatShareChart';
 import { MicrositeStory } from '@/components/MicrositeStory';
 import { ReportIssueButton } from '@/components/ReportIssueButton';
 import { SheepChart } from '@/components/SheepChart';
 import { StatCard } from '@/components/StatCard';
 import { env } from '@/env';
+import { GOVERNMENT_CHANGE_EVENTS } from '@/lib/government-data';
+import type { ParliamentSeatSource } from '@/lib/government-data';
 import {
   categorySlugFor,
   freshnessLabelFor,
@@ -15,8 +19,36 @@ import {
   MICROSITES,
   relatedMicrositesFor,
 } from '@/lib/microsites';
+import { fetchParliamentPartySeats } from '@/lib/parliament-datastore';
+import { bucketKeyFor, PARTY_BUCKETS } from '@/lib/party-buckets';
 import { fetchSheepSeries } from '@/lib/sheep-data';
 import { formatMillions as formatMillionsSheep } from '@/lib/sheep-format';
+
+/**
+ * First parliament shown by the parliament story: the 25th, opened by the
+ * 1935 election. That is the first Labour government and the start of the
+ * Labour / National era these party buckets describe. Earlier parliaments
+ * are run by parties (Liberal, Reform, United) that have no bucket of their
+ * own.
+ */
+const FIRST_TWO_PARTY_PARLIAMENT = 25;
+
+/** How the parliament story got its seat counts, stated on the page. */
+const SOURCE_SENTENCE: Record<ParliamentSeatSource, string> = {
+  datastore: 'Seat counts were fetched from the datastore when this page was built.',
+  snapshot:
+    'The datastore was unreachable when this page was built, so the counts come from a committed snapshot of the same table.',
+};
+
+const PARTY_LABELS = new Map(PARTY_BUCKETS.map((bucket) => [bucket.key, bucket.label]));
+
+/**
+ * Chart label for a party's full datastore name, so a stat card says
+ * "National" where the chart legend does too.
+ */
+function bucketLabelForParty(party: string): string {
+  return PARTY_LABELS.get(bucketKeyFor(party)) ?? party;
+}
 
 interface MicrositePageProps {
   params: Promise<{ category: string; slug: string }>;
@@ -59,14 +91,12 @@ export default async function MicrositePage({
     notFound();
   }
 
-  const [sheep] = await Promise.all([fetchSheepSeries(env.STATS_NZ_SUBSCRIPTION_KEY)]);
-
   const related = relatedMicrositesFor(microsite).map((candidate) => ({
     label: candidate.label,
     href: micrositePathFor(candidate),
   }));
 
-  const content = renderStoryContent(slug, { sheep });
+  const content = await renderStoryContent(slug, microsite.dataNote);
 
   return (
     <>
@@ -108,7 +138,7 @@ export default async function MicrositePage({
         accent={microsite.accent}
         chart={content.chart}
         stats={content.stats}
-        dataNote={microsite.dataNote}
+        dataNote={content.dataNote}
         references={microsite.references}
       />
       <ReportIssueButton pageLabel={microsite.label} />
@@ -116,43 +146,99 @@ export default async function MicrositePage({
   );
 }
 
-interface StoryData {
-  sheep: Awaited<ReturnType<typeof fetchSheepSeries>>;
+interface StoryContent {
+  chart: React.ReactNode;
+  stats: React.ReactNode;
+  /** Source note for the footer, defaulting to the microsite config's own. */
+  dataNote: string;
 }
 
-function renderStoryContent(
-  slug: string,
-  data: StoryData,
-): { chart: React.ReactNode; stats: React.ReactNode } {
+/**
+ * Builds the chart, stats, and source note for one story. Each story fetches
+ * only the data it draws, so a story page never depends on another story's
+ * upstream API.
+ * @param slug - microsite slug
+ * @param dataNote - the microsite config's source note
+ */
+async function renderStoryContent(slug: string, dataNote: string): Promise<StoryContent> {
   switch (slug) {
-    case 'sheep-index':
+    case 'sheep-index': {
+      const sheep = await fetchSheepSeries(env.STATS_NZ_SUBSCRIPTION_KEY);
       return {
-        chart: <SheepChart points={data.sheep.points} />,
+        chart: <SheepChart points={sheep.points} />,
         stats: (
           <dl className="grid gap-6 py-[var(--spacing-2xl)] sm:grid-cols-3">
             <StatCard
-              label={`Sheep right now (${data.sheep.latest.year})`}
-              value={formatMillionsSheep(data.sheep.latest.sheep)}
+              label={`Sheep right now (${sheep.latest.year})`}
+              value={formatMillionsSheep(sheep.latest.sheep)}
               accent="amber"
               testId="sheep-latest"
-              dataValue={data.sheep.latest.sheep}
+              dataValue={sheep.latest.sheep}
             />
             <StatCard
-              label={`Peak flock (${data.sheep.peak.year})`}
-              value={formatMillionsSheep(data.sheep.peak.sheep)}
+              label={`Peak flock (${sheep.peak.year})`}
+              value={formatMillionsSheep(sheep.peak.sheep)}
               accent="amber"
             />
             <StatCard
               label="Change since peak"
-              value={`${Math.round(data.sheep.changeFromPeakPercent)}%`}
+              value={`${Math.round(sheep.changeFromPeakPercent)}%`}
               accent="amber"
               testId="sheep-change"
-              dataValue={Math.round(data.sheep.changeFromPeakPercent)}
+              dataValue={Math.round(sheep.changeFromPeakPercent)}
             />
           </dl>
         ),
+        dataNote,
       };
+    }
+    case 'parliament-party-seats': {
+      const { rows, source } = await fetchParliamentPartySeats();
+      const shownRows = rows.filter((row) => row.parliament >= FIRST_TWO_PARTY_PARLIAMENT);
+      const latest = shownRows.at(-1);
+      return {
+        chart: (
+          <div>
+            <GovernmentPartyChart rows={shownRows} />
+            <div className="mt-16">
+              <h2 className="numeral-heading-2xl">Share of the house, and who held the top job.</h2>
+              <p className="numeral-paragraph-md mt-2 max-w-3xl text-[var(--color-muted)]">
+                The same seats as a share of the House, so the parties stay comparable as it grew.
+                Time runs left to right, and the top band overlays the prime minister of each era.
+              </p>
+              <div className="mt-6">
+                <GovernmentSeatShareChart rows={shownRows} />
+              </div>
+            </div>
+          </div>
+        ),
+        stats: (
+          <dl className="grid gap-6 py-[var(--spacing-2xl)] sm:grid-cols-3">
+            <StatCard
+              label="Elections shown"
+              value={String(shownRows.length)}
+              accent="teal"
+              testId="parliament-elections"
+              dataValue={shownRows.length}
+            />
+            <StatCard
+              label={`Largest party at the ${latest === undefined ? 'latest' : String(latest.electionYear)} election`}
+              value={latest === undefined ? '—' : bucketLabelForParty(latest.largestParty)}
+              accent="teal"
+            />
+            <StatCard
+              label="Government changes"
+              value={String(GOVERNMENT_CHANGE_EVENTS.length)}
+              accent="teal"
+              testId="parliament-changes"
+              dataValue={GOVERNMENT_CHANGE_EVENTS.length}
+            />
+          </dl>
+        ),
+        dataNote: `${dataNote} ${SOURCE_SENTENCE[source]}`,
+      };
+    }
     default:
-      return { chart: null, stats: null };
+      return { chart: null, stats: null, dataNote };
   }
 }

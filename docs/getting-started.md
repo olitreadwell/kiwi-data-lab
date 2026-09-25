@@ -17,6 +17,17 @@ npm run dev
 
 Open <http://localhost:3000> for the app, <http://localhost:6006> for Storybook (`npm run storybook`).
 
+Opening the dev server from another device (say <http://192.168.0.135:3000>) needs that host listed
+in `ALLOWED_DEV_ORIGINS`, otherwise Next blocks the client chunks and anything client-rendered
+(the recharts charts, for one) stays blank:
+
+```bash
+# apps/web/.env.local
+ALLOWED_DEV_ORIGINS=192.168.0.135
+```
+
+Restart `npm run dev` after changing it. Builds are not affected; this is a dev-server guard only.
+
 ## Environment variables
 
 ```bash

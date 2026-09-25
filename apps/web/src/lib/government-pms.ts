@@ -1,13 +1,13 @@
 import type { PartyBucketKey } from '@/lib/party-buckets';
 
 /**
- * New Zealand prime ministers since 1984, curated as pinned facts (same
+ * New Zealand prime ministers since 1935, curated as pinned facts (same
  * status as GOVERNMENT_CHANGE_EVENTS): the governing party is not always
  * the largest party, and who held the top job is a documented fact, not a
  * derivation. Client-safe so charts can use it.
  */
 
-/** One prime ministerial term since 1984. */
+/** One prime ministerial term since 1935. */
 export interface PrimeMinisterPeriod {
   name: string;
   /** Charts bucket for the PM's party; Labour and National have both held it. */
@@ -20,8 +20,86 @@ export interface PrimeMinisterPeriod {
   citation: string;
 }
 
-/** Prime ministers since 1984, oldest first and contiguous by calendar year. */
+/** Prime ministers since 1935, oldest first and contiguous by calendar year. */
 export const PRIME_MINISTERS: PrimeMinisterPeriod[] = [
+  {
+    name: 'Michael Joseph Savage',
+    party: 'labour',
+    fromYear: 1935,
+    toYear: 1940,
+    citation:
+      'Michael Joseph Savage was sworn in on 6 December 1935 after Labour won the 27 November 1935 election, and died in office on 27 March 1940.',
+  },
+  {
+    name: 'Peter Fraser',
+    party: 'labour',
+    fromYear: 1940,
+    toYear: 1949,
+    citation: 'Peter Fraser took over as prime minister on 1 April 1940, after Savage died.',
+  },
+  {
+    name: 'Sidney Holland',
+    party: 'national',
+    fromYear: 1949,
+    toYear: 1957,
+    citation:
+      'Sidney Holland was sworn in on 13 December 1949 after National won the 30 November 1949 election, and resigned on 20 September 1957.',
+  },
+  {
+    name: 'Keith Holyoake',
+    party: 'national',
+    fromYear: 1957,
+    toYear: 1957,
+    citation:
+      'Keith Holyoake became prime minister on 20 September 1957, then lost the 30 November 1957 election.',
+  },
+  {
+    name: 'Walter Nash',
+    party: 'labour',
+    fromYear: 1957,
+    toYear: 1960,
+    citation:
+      'Walter Nash became prime minister on 12 December 1957 after Labour won the 30 November 1957 election.',
+  },
+  {
+    name: 'Keith Holyoake',
+    party: 'national',
+    fromYear: 1960,
+    toYear: 1972,
+    citation:
+      'Keith Holyoake returned as prime minister on 12 December 1960 and resigned on 7 February 1972.',
+  },
+  {
+    name: 'Jack Marshall',
+    party: 'national',
+    fromYear: 1972,
+    toYear: 1972,
+    citation:
+      'Jack Marshall became prime minister on 7 February 1972 and lost the 25 November 1972 election.',
+  },
+  {
+    name: 'Norman Kirk',
+    party: 'labour',
+    fromYear: 1972,
+    toYear: 1974,
+    citation:
+      'Norman Kirk became prime minister on 8 December 1972 after Labour won the 25 November 1972 election, and died in office on 31 August 1974.',
+  },
+  {
+    name: 'Bill Rowling',
+    party: 'labour',
+    fromYear: 1974,
+    toYear: 1975,
+    citation: 'Bill Rowling took over as prime minister on 6 September 1974, after Kirk died.',
+  },
+  {
+    name: 'Robert Muldoon',
+    party: 'national',
+    fromYear: 1975,
+    toYear: 1984,
+    citation:
+      'Robert Muldoon became prime minister on 12 December 1975 after National won the 29 November 1975 election.',
+  },
   {
     name: 'David Lange',
     party: 'labour',
@@ -151,4 +229,23 @@ export function primeMinisterRuns(
     }
   }
   return runs;
+}
+
+/**
+ * Everyone who held the office at any point in a calendar year, oldest
+ * first. A changeover year holds two names (2017 runs from Bill English to
+ * Jacinda Ardern) and 2023 holds three, which is the point: a band labelled
+ * "Ardern +1" cannot say who was in the job when a given election happened,
+ * so tooltips read it off this list. Years before the list starts come back
+ * empty.
+ * @param year
+ * @param periods
+ */
+export function primeMinistersDuringYear(
+  year: number,
+  periods: PrimeMinisterPeriod[] = PRIME_MINISTERS,
+): PrimeMinisterPeriod[] {
+  return periods.filter(
+    (period) => period.fromYear <= year && (period.toYear === null || period.toYear >= year),
+  );
 }

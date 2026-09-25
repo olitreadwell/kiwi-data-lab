@@ -3,9 +3,10 @@
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import type { TooltipContentProps } from 'recharts';
 
+import { electionYearRangeLabelFor } from '@/lib/government-data';
 import type { ParliamentPartyRow } from '@/lib/government-data';
 import { GOVERNMENT_CHANGE_EVENTS } from '@/lib/government-events';
-import { PARTY_BUCKETS } from '@/lib/party-buckets';
+import { PARTY_BUCKETS, partyBucketsBySizeFor } from '@/lib/party-buckets';
 import { formatShare, toPartyShareRows } from '@/lib/party-share';
 import { usePrefersReducedMotion } from '@/lib/use-prefers-reduced-motion';
 
@@ -13,6 +14,7 @@ import { ChartDataTable } from './ChartDataTable';
 import { ChartExplain, EventMarkerLegend, EventReferenceLines } from './ChartNotes';
 import { PrimeMinisterBand } from './PrimeMinisterBand';
 import { PrimeMinisterLegend } from './PrimeMinisterLegend';
+import { PrimeMinisterTooltipLine } from './PrimeMinisterTooltipLine';
 
 interface GovernmentSeatShareChartProps {
   rows: ParliamentPartyRow[];
@@ -29,9 +31,11 @@ function ShareTooltip({ active, label, payload }: TooltipContentProps): React.Re
   if (!active || payload === undefined || payload.length === 0) {
     return null;
   }
+  const year = Number(label);
   return (
-    <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm shadow-sm">
+    <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2 text-sm text-[var(--color-fg)] shadow-sm">
       <p className="font-medium">{label}</p>
+      {Number.isFinite(year) ? <PrimeMinisterTooltipLine year={year} /> : null}
       {payload.map((entry) => (
         <p key={String(entry.dataKey)} className="text-[var(--color-muted)]">
           {String(entry.name)}: {formatShare(Number(entry.value))} of seats
@@ -54,11 +58,15 @@ export function GovernmentSeatShareChart({
 }: GovernmentSeatShareChartProps): React.ReactElement {
   const prefersReducedMotion = usePrefersReducedMotion();
   const shareRows = toPartyShareRows(rows);
+  // Smallest party first, so the biggest block of each stack sits on top.
+  const stackOrder = partyBucketsBySizeFor(rows);
+  const yearRangeLabel = electionYearRangeLabelFor(rows);
   const firstYear = shareRows[0]?.year ?? 0;
   const lastYear = shareRows[shareRows.length - 1]?.year ?? 0;
-  // Leave two empty years past the last election so the current prime
-  // minister's band has room to reach the right edge instead of vanishing.
-  const domainEndYear = lastYear + 2;
+  // Leave room past the last election: the current prime minister's band is
+  // only as wide as the years it covers, and the name inside it needs about
+  // four years of width before it can be drawn at all.
+  const domainEndYear = lastYear + 4;
   return (
     <div>
       <ul className="mb-2 flex flex-wrap gap-x-4 gap-y-1">
@@ -85,7 +93,7 @@ export function GovernmentSeatShareChart({
           <AreaChart
             data={shareRows}
             margin={{ top: 8, right: 8, bottom: 8, left: 8 }}
-            aria-label="Share of seats by party per parliament, 1984 to 2023"
+            aria-label={`Share of seats by party per parliament, ${yearRangeLabel}`}
           >
             <XAxis
               dataKey="year"
@@ -106,7 +114,16 @@ export function GovernmentSeatShareChart({
               content={ShareTooltip}
               cursor={{ stroke: 'var(--color-border)', strokeDasharray: '4 4' }}
             />
-            {PARTY_BUCKETS.map((bucket) => (
+            <Area
+              dataKey="other"
+              name="Other"
+              stackId="share"
+              fill="var(--color-muted)"
+              stroke="var(--color-muted)"
+              strokeWidth={1}
+              isAnimationActive={!prefersReducedMotion}
+            />
+            {stackOrder.map((bucket) => (
               <Area
                 key={bucket.key}
                 dataKey={bucket.key}
@@ -118,15 +135,6 @@ export function GovernmentSeatShareChart({
                 isAnimationActive={!prefersReducedMotion}
               />
             ))}
-            <Area
-              dataKey="other"
-              name="Other"
-              stackId="share"
-              fill="var(--color-muted)"
-              stroke="var(--color-muted)"
-              strokeWidth={1}
-              isAnimationActive={!prefersReducedMotion}
-            />
             <EventReferenceLines events={GOVERNMENT_CHANGE_EVENTS} />
             <PrimeMinisterBand fromYear={firstYear} toYear={domainEndYear} />
           </AreaChart>
@@ -135,9 +143,13 @@ export function GovernmentSeatShareChart({
       <ChartExplain>
         Time runs left to right, one year per election. The height of each coloured band is that
         party&apos;s share of all seats, so the bands always add up to 100%. The dashed flags mark
-        the six years the government changed. The band across the top shows which party held the
-        prime ministership between elections — the same party colours, with the prime
-        ministers&apos; names inside.
+        the years the government changed. The band across the top shows which party held the prime
+        ministership between elections, in the same party colours. A band names the prime ministers
+        who held the office when their names fit. When they do not, it shows the first name and a
+        count of the others, or nothing at all on a narrow screen. The list below always has every
+        one of them with their dates, and hovering a year names the prime ministers who held office
+        then. The smallest parties sit at the bottom of the stack and the biggest on top, so the
+        biggest blocks are the easiest ones to read.
       </ChartExplain>
       <EventMarkerLegend
         heading="Government changes on this chart"
@@ -145,7 +157,7 @@ export function GovernmentSeatShareChart({
       />
       <PrimeMinisterLegend />
       <ChartDataTable
-        summary="Share of seats by party per election, as a percentage."
+        summary={`Share of seats by party per election, ${yearRangeLabel}, as a percentage.`}
         columns={[
           { key: 'year', header: 'Election year' },
           { key: 'labour', header: 'Labour', format: formatShare },

@@ -119,6 +119,12 @@ Sonnet→Haiku handoff record), and `TUTORIAL.md` (the outside-reader writeup, w
 last). Register shipped experiments in `apps/web/src/lib/experiments.ts` and
 `INDEX.md`; tutorial-worthy ones also go in `TUTORIALS.md`.
 
+When an experiment graduates into a published story, it moves to the microsite
+registry instead (`apps/web/src/lib/microsites.ts`, gated by `PUBLISHED_MICROSITES`)
+and gets a category, so it sits at `/<category>/<slug>/` beside the other stories.
+Leave a redirect behind at the old `/experiments/<slug>/` route, the way
+`parliament-party-seats` does.
+
 Optional, per-experiment libs already installed in `apps/web` but not required
 everywhere: gsap, three, `@react-three/fiber` + `drei` + `postprocessing`, leva — reach
 for these only on experiments that actually need animation or 3D.

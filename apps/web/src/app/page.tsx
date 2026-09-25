@@ -1,5 +1,4 @@
 import { Container, Stack } from '@nzlab/ui';
-import Link from 'next/link';
 
 import { MicrositeGallery } from '@/components/MicrositeGallery';
 import type { MicrositeGalleryCard } from '@/components/MicrositeGallery';
@@ -67,22 +66,6 @@ export default async function HomePage(): Promise<React.ReactElement> {
           </p>
         </Stack>
         <div className="pb-[var(--spacing-3xl)]">
-          {' '}
-          <Link
-            href="/experiments/parliament-party-seats"
-            className="text-decoration-none mt-10 block max-w-3xl rounded-[var(--radius-lg)] border border-[var(--color-border)] p-6 transition-colors hover:border-[var(--color-fg)]"
-          >
-            <span className="numeral-text-eyebrow text-[var(--color-muted)]">
-              experiment / parliament-party-seats
-            </span>
-            <span className="numeral-heading-2xl mt-2 block">
-              Which party held the most seats, election by election.
-            </span>
-            <span className="numeral-paragraph-sm mt-2 block text-[var(--color-muted)]">
-              Seats and share of the house for every election since 1984, with the prime minister of
-              each era.
-            </span>
-          </Link>
           <MicrositeGallery cards={galleryCards} />
         </div>
       </Container>
