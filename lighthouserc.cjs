@@ -21,19 +21,27 @@ module.exports = {
       settings: { chromeFlags: '--no-sandbox' },
     },
     assert: {
-      // Budgets are Lighthouse's mobile simulation (Moto G, slow 4G, 4x CPU),
-      // which is the harsh end of what a public site should survive. The
-      // measured baseline on 2026-09-25, three runs per URL, was:
+      // Budgets are Lighthouse's mobile simulation (Moto G, slow 4G, 4x CPU).
+      // The numbers it produces depend heavily on the machine underneath, so
+      // the budgets below carry headroom over a measured baseline rather than
+      // sitting on top of it.
+      //
+      // Local baseline, 2026-09-25 on an M-series Mac:
       //
       //   /                                 LCP 2485  FCP 756  TBT  29
       //   /about/                           LCP 2183  FCP 753  TBT  30
       //   /agriculture/sheep-index/         LCP 2857  FCP 754  TBT  73
       //   /politics/parliament-party-seats/ LCP 2856  FCP 753  TBT  88
       //
-      // Observed (unthrottled) LCP on the same runs was 42-83ms on every
-      // page, so the simulated figure is dominated by the throttle model
-      // rather than by the site. The LCP budget carries headroom above the
-      // baseline; FCP, TBT and CLS are already comfortable and stay tight.
+      // CI baseline, the same day on a 2 vCPU ubuntu-latest runner (run
+      // 36097802882): TBT 354, 418 and 479 on three of the four URLs, and a
+      // performance score of 0.83-0.89. The 4x CPU throttle on a shared
+      // runner is what moves TBT, not the site: observed (unthrottled) LCP
+      // was 42-83ms locally, where TBT stayed under 90.
+      //
+      // A regression of the size this gate exists to catch, a heavy client
+      // component or a runaway render, moves these by hundreds of
+      // milliseconds, well past the headroom here.
       assertions: {
         'categories:performance': ['warn', { minScore: 0.9 }],
         'categories:accessibility': ['error', { minScore: 0.95 }],
@@ -41,7 +49,7 @@ module.exports = {
         'categories:seo': ['warn', { minScore: 0.9 }],
         'first-contentful-paint': ['error', { maxNumericValue: 2000 }],
         'largest-contentful-paint': ['error', { maxNumericValue: 3000 }],
-        'total-blocking-time': ['error', { maxNumericValue: 200 }],
+        'total-blocking-time': ['error', { maxNumericValue: 600 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
       },
     },
