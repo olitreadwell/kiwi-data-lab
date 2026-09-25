@@ -45,18 +45,11 @@ jobs:
     if: needs.preflight.outputs.skip == 'false'
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        if: hashFiles('pnpm-lock.yaml') != ''
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-      - name: Install dependencies
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            pnpm install --frozen-lockfile
-          else
-            npm ci
-          fi
+          cache: 'npm'
+      - run: npm ci
       # Fail fast: cheap checks first, heavy work only after they pass.
       - run: npm run format:check
       - run: npm run lint
@@ -73,20 +66,13 @@ jobs:
     if: needs.preflight.outputs.skip == 'false'
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        if: hashFiles('pnpm-lock.yaml') != ''
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-      - name: Install dependencies and audit
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            pnpm install --frozen-lockfile
-            pnpm audit --audit-level=high || true
-          else
-            npm ci
-            npm audit --audit-level=high || true
-          fi
+          cache: 'npm'
+      - run: npm ci
+      # Blocks at high and above, matching the Security workflow.
+      - run: npm audit --audit-level=high
 
   e2e:
     name: E2E (shard ${{ matrix.shard }}/2)
@@ -100,18 +86,11 @@ jobs:
         shard: [1, 2]
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        if: hashFiles('pnpm-lock.yaml') != ''
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-      - name: Install dependencies
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            pnpm install --frozen-lockfile
-          else
-            npm ci
-          fi
+          cache: 'npm'
+      - run: npm ci
       - name: Build static export (e2e bootstraps its own server)
         run: npm run build
       - name: Install Playwright browsers
@@ -123,9 +102,48 @@ jobs:
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.shard }}
           path: apps/web/playwright-report/
           retention-days: 3
+
+  a11y:
+    name: Accessibility (axe)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [preflight, check]
+    if: needs.preflight.outputs.skip == 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - name: Build static export (the a11y run boots its own server)
+        run: npm run build
+      - name: Install Playwright browsers
+        working-directory: apps/web
+        run: npx playwright install --with-deps chromium
+      - run: npx playwright test --grep @a11y
+        working-directory: apps/web
+
+  perf:
+    name: Performance (Lighthouse CI)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [preflight, check]
+    if: needs.preflight.outputs.skip == 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - name: Build static export (Lighthouse audits the built out/)
+        run: npm run build
+      # Budgets and the measured baseline live in lighthouserc.cjs.
+      - run: npm run perf
 
   actions-lint:
     name: Workflow lint (actionlint)

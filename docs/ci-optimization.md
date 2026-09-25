@@ -10,15 +10,16 @@ snippets here are the GitHub Actions form used by this repo.
    and `quality.yml` skip pushes that touch only `docs/**` and markdown.
    The PR is the quality gate, so nothing is lost.
 2. **Fail-fast ordering** — the `check` job runs cheap gates first
-   (format → lint → typecheck), then coverage → build → smoke; `e2e`
-   waits for `check`. A broken format fails in ~10s, not after a build.
+   (format → lint → typecheck), then coverage → build → smoke; `e2e`,
+   `a11y` and `perf` all wait for `check`. A broken format fails in ~10s,
+   not after a build.
 3. **Concurrency cancellation** — every workflow has a
    `concurrency: { group: <name>-${{ github.ref }}, cancel-in-progress: true }`
    block, so a new push to the same branch kills the in-flight run.
 4. **Skip token** — a `preflight` job skips the whole run when the commit
    message or PR title contains `[skip ci]` or `[ci skip]`.
-5. **Dependency caching** — `actions/setup-node` with `cache: 'pnpm'`
-   keys on the lockfile checksum; `pnpm install --frozen-lockfile` is used
+5. **Dependency caching** — `actions/setup-node` with `cache: 'npm'`
+   keys on the lockfile checksum; `npm ci` is used
    everywhere (CI, Docker, local) so installs are reproducible and warm.
 6. **Docker layer caching** — `docker.yml` builds with
    `--cache-from=type=gha --cache-to=type=gha,mode=max`; the Dockerfile
@@ -33,7 +34,7 @@ snippets here are the GitHub Actions form used by this repo.
    pushed to a registry, so there is no image-bloat cost.
 9. **Left-shifted checks** — `pre-commit` runs lint + typecheck + tests in
    parallel; `pre-push` runs the full `check` plus a blocking
-   `pnpm audit --audit-level=high`. CI runs the exact same contract.
+   `npm audit --audit-level=high`. CI runs the exact same contract.
 10. **Scheduled jobs** — the only cron is the weekly template sync
     (Monday 03:00 UTC). Dependabot handles dependency updates as PRs, not
     nightly scans. There are no staging/preview environments; the Docker
