@@ -16,8 +16,10 @@ module.exports = {
         'http://127.0.0.1:3000/politics/parliament-party-seats/',
       ],
       startServerCommand: 'cd apps/web && npx serve out -l 3000',
-      startServerReadyPattern: 'Serving!',
-      numberOfRuns: 1,
+      // Three runs, because the metric that moves most on a shared runner
+      // (total-blocking-time) swung between 354ms and 944ms across two CI
+      // runs of the same code. Lighthouse CI reports the median.
+      numberOfRuns: 3,
       settings: { chromeFlags: '--no-sandbox' },
     },
     assert: {
@@ -33,15 +35,16 @@ module.exports = {
       //   /agriculture/sheep-index/         LCP 2857  FCP 754  TBT  73
       //   /politics/parliament-party-seats/ LCP 2856  FCP 753  TBT  88
       //
-      // CI baseline, the same day on a 2 vCPU ubuntu-latest runner (run
-      // 36097802882): TBT 354, 418 and 479 on three of the four URLs, and a
-      // performance score of 0.83-0.89. The 4x CPU throttle on a shared
-      // runner is what moves TBT, not the site: observed (unthrottled) LCP
-      // was 42-83ms locally, where TBT stayed under 90.
+      // CI baseline, the same day on 2 vCPU ubuntu-latest runners: FCP and
+      // LCP landed in the same range as local on both runs, and CLS stayed
+      // at 0. TBT did not: run 36097802882 measured 354, 418 and 479ms,
+      // run 36098191350 measured 672 and 944ms on the same code, which is
+      // the 4x CPU throttle multiplying whatever the shared runner had
+      // going on at the time.
       //
-      // A regression of the size this gate exists to catch, a heavy client
-      // component or a runaway render, moves these by hundreds of
-      // milliseconds, well past the headroom here.
+      // So FCP, LCP and CLS carry budgets that mean something, and TBT is a
+      // coarse guard for a runaway render rather than a target. A regression
+      // worth blocking moves it well past 1500ms.
       assertions: {
         'categories:performance': ['warn', { minScore: 0.9 }],
         'categories:accessibility': ['error', { minScore: 0.95 }],
@@ -49,7 +52,7 @@ module.exports = {
         'categories:seo': ['warn', { minScore: 0.9 }],
         'first-contentful-paint': ['error', { maxNumericValue: 2000 }],
         'largest-contentful-paint': ['error', { maxNumericValue: 3000 }],
-        'total-blocking-time': ['error', { maxNumericValue: 600 }],
+        'total-blocking-time': ['error', { maxNumericValue: 1500 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
       },
     },
